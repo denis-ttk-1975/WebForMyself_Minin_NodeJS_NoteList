@@ -1,0 +1,15 @@
+{
+  "name": "node-practice",
+  "version": "1.0.0",
+  "description": "Task list practice app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Denis Ulesov <denis.ttk@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "yargs": "^17.0.1"
+  }
+}
