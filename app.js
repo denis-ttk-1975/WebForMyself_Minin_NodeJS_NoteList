@@ -1,13 +1,26 @@
 const yargs = require('yargs');
-const pkg = require('./package.json')
+const pkg = require('./package.json');
+const notes = require('./notes');
 
 yargs.version(pkg.version);
 
 yargs.command({
 	command: 'add',
 	describe: 'Add new note',
-	handler() {
-		console.log('Add command');
+	builder: {
+		title: {
+			type: 'string',
+			demandOption: true,
+			describe: 'Note header'
+		},
+		text: {
+			type: 'string',
+			demandOption: true,
+			describe: 'Note content'
+		}
+	},
+	handler({title, text}) {
+		notes.addNote(title, text);
 	}
 });
 
