@@ -35,16 +35,30 @@ yargs.command({
 yargs.command({
 	command: 'read',
 	describe: 'Shows pointed note',
-	handler() {
-		console.log('Read command');
+	builder: {
+		title: {
+			type: 'string',
+			demandOption: true,
+			describe: 'Note header'
+		}
+	},
+	handler({title}) {
+		notes.readNote(title);
 	}
 });
 
 yargs.command({
 	command: 'remove',
 	describe: 'Delete pointed note',
-	handler() {
-		console.log('Remove command');
+	builder: {
+		title: {
+			type: 'string',
+			demandOption: true,
+			describe: 'Note header'
+		}
+	},
+	handler({title}) {
+		notes.deleteNote(title);
 	}
 });
 

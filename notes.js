@@ -52,6 +52,31 @@ getNotes(notes => {
 	});
 };
 
+const readNote = (title) => {
+	getNotes(notes => {
+		const note = notes.find(n => n.title === title);
+		if (note) {
+			console.log(chalk.inverse(note.title));
+			console.log(note.text);
+		} else {
+			console.log(chalk.red.inverse(`Note with header "${title}" is absent.`));
+		}
+	});
+};
+
+const deleteNote = (title) => {
+	getNotes(notes => {
+		const updatedNotes = notes.filter(note => note.title !== title);
+
+		if (updatedNotes.length !== notes.length) {
+			saveNotes(updatedNotes);
+			console.log(chalk.green('Note with header "${title}" deleted successfully'));
+		} else {
+			console.log(chalk.red.inverse(`Note with header "${title}" is not found.`));
+		}
+	});
+};
+
 module.exports = {
-	addNote, listNotes
+	addNote, listNotes, readNote, deleteNote
 };
