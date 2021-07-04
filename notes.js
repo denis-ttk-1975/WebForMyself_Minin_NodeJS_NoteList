@@ -18,6 +18,14 @@ const getNotes = (callbackFunction) => {
 	});
 };
 
+const saveNotes = (content) => {
+	fs.writeFile(notesJsonPath, JSON.stringify(content), err => {
+		if (err) {
+			throw new Error (err);
+		}
+	});
+};
+
 const addNote = (title, text) => {
 	getNotes((param) => {
 		console.log('addNote', param);
@@ -27,11 +35,23 @@ const addNote = (title, text) => {
 			console.log(chalk.red.inverse('Note with the same title already exists'));
 		} else {
 			param.push({ title, text});
+			saveNotes(param);
 			console.log(chalk.green.inverse('Note is added'));
 		}
 	});
 };
 
+const listNotes = () => {
+getNotes(notes => {
+	if (notes.length) {
+		console.log(chalk.inverse('Your notes: '));
+		notes.forEach(note => console.log(note.title));
+	} else {
+		console.log(chalk.blue('No one note is exist in file. Create first note!'));
+		}
+	});
+};
+
 module.exports = {
-	addNote
+	addNote, listNotes
 };
